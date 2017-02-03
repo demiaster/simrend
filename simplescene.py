@@ -5,6 +5,7 @@ import getpass
 import time
 # import the python renderman library
 import prman
+import math
 
 def Cube(width,height,depth) :
   w=width/2.0
@@ -30,6 +31,72 @@ def Cube(width,height,depth) :
   face=[w, h, d, w, h, -d, -w, h, d, -w, h, -d]
   ri.Patch("bilinear",{'P':face})
   ri.ArchiveRecord(ri.COMMENT, '--End of Cube Function--')
+
+def Molecula() :
+
+  ri.ArchiveRecord(ri.COMMENT, 'draw a sphere primitive')
+  
+  ri.TransformBegin()
+  ri.Rotate(45, 0, 1, 0) #y axis
+  ri.Rotate(45, 1, 0, 0) #x axis
+  ri.Translate(0, 0, 0) #move the whole object
+
+
+  ri.TransformBegin()
+  radius = 0.5
+  ri.Rotate(0, 1, 0, 0) #x axis
+  #ri.Rotate(45, 0, 1, 0) #y axis
+  ri.Rotate(-45, 0, 0, 1) #z axis
+  #ri.Translate(1, groud_position + radius, 0)
+  ri.Scale(0.1, 1, 0.1)
+  ri.AttributeBegin()
+  ri.Color([1, 1, 1])
+  ri.Sphere (radius, -radius, radius, 360)
+  ri.AttributeEnd()
+  ri.TransformEnd()
+
+  #bottom small ball
+  ri.TransformBegin()
+  rad = 0.05
+  sqrt = math.sqrt(2)
+  ri.Translate(- 0.5*radius*sqrt, - 0.5*radius*sqrt, 0.5*radius*sqrt)
+  ri.AttributeBegin()
+  ri.Color([1, 1, 1])
+  ri.Sphere (rad, -rad, rad, 360)
+  ri.AttributeEnd()
+  ri.TransformEnd()
+
+  #top small ball
+
+  # ri.TransformBegin()
+  # radius = 0.5
+  # ri.Rotate(0, 1, 0, 0) #x axis
+  # #ri.Rotate(45, 0, 1, 0) #y axis
+  # ri.Rotate(45, 0, 0, 1) #z axis
+  # #ri.Translate(1, groud_position + radius, 0)
+  # ri.Scale(0.1, 1, 0.1)
+  # ri.AttributeBegin()
+  # ri.Color([1, 1, 1])
+  # ri.Sphere (radius, -radius, radius, 360)
+  # ri.AttributeEnd()
+  # ri.TransformEnd()
+
+
+
+  # ri.TransformBegin()
+  # radius = 0.5
+  # #ri.Rotate(45, 0, 1, 0) #y axis
+  # ri.Rotate(90, 1, 0, 0) #x axis  
+  # ri.Rotate(0, 0, 0, 1) #z axis
+  # #ri.Translate(1, groud_position + radius, 0)
+  # ri.Scale(0.1, 1, 0.1)
+  # ri.AttributeBegin()
+  # ri.Color([1, 1, 1])
+  # ri.Sphere (radius, -radius, radius, 360)
+  # ri.AttributeEnd()
+  # ri.TransformEnd()
+
+  ri.TransformEnd()
 
 ri = prman.Ri() # create an instance of the RenderMan interface
 
@@ -57,7 +124,8 @@ ri.WorldBegin()
 groud_position = -1
 # move back 2 in the z so we can see what we are rendering
 ri.ArchiveRecord(ri.COMMENT, 'move our world back 2 in the z so we can see it')
-ri.Translate(0,0,2)
+ri.Translate(0, 0, 2)
+
 ri.ArchiveRecord(ri.COMMENT, 'draw ground with bilinear patch')
 ri.TransformBegin()
 height = 0.1
@@ -78,19 +146,32 @@ ri.TransformEnd()
 # ri.AttributeEnd()
 # ri.TransformEnd()
 
-ri.ArchiveRecord(ri.COMMENT, 'draw a teapot')
-ri.TransformBegin()
-scale = 0.4
-ri.Scale(scale, scale, scale)
-ri.Translate(-2.5, groud_position + groud_position*(1 - scale), 1)
-ri.Rotate(-90, 1, 0, 0) #x axis
-ri.Rotate(0, 0, 1, 0) #y axis
-ri.Rotate(60, 0, 0, 1) #z axis
-ri.AttributeBegin()
-ri.Color([0, 1, 0])
-ri.Geometry("teapot")
-ri.AttributeEnd()
-ri.TransformEnd()
+# ri.ArchiveRecord(ri.COMMENT, 'draw a teapot')
+# ri.TransformBegin()
+# scale = 0.4
+# ri.Scale(scale, scale, scale)
+# ri.Translate(-2.5, groud_position + groud_position*(1 - scale), 1)
+# ri.Rotate(-90, 1, 0, 0) #x axis
+# ri.Rotate(0, 0, 1, 0) #y axis
+# ri.Rotate(60, 0, 0, 1) #z axis
+# ri.AttributeBegin()
+# ri.Color([0, 1, 0])
+# ri.Geometry("teapot")
+# ri.AttributeEnd()
+# ri.TransformEnd()
+
+# ri.ArchiveRecord(ri.COMMENT, 'draw cube')
+# ri.TransformBegin()
+# dimension = 0.5
+# ri.Translate(0, groud_position + dimension/2, 0)
+# ri.Rotate(60, 0, 1, 0) #y axis
+# ri.AttributeBegin()
+# ri.Color([0, 0, 1])
+# Cube(dimension, dimension, dimension)
+# ri.AttributeEnd()
+# ri.TransformEnd()
+
+Molecula()
 
 # end our world
 ri.ArchiveRecord(ri.COMMENT, 'end our world')
