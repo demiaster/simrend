@@ -68,13 +68,27 @@ Cube(7, height, 4)
 ri.AttributeEnd()
 ri.TransformEnd()
 
-ri.ArchiveRecord(ri.COMMENT, 'draw a sphere primitive')
+# ri.ArchiveRecord(ri.COMMENT, 'draw a sphere primitive')
+# ri.TransformBegin()
+# radius = 0.5
+# ri.Translate(1, groud_position + radius, 0)
+# ri.AttributeBegin()
+# ri.Color([1, 0, 0])
+# ri.Sphere (radius, -radius, radius, 360)
+# ri.AttributeEnd()
+# ri.TransformEnd()
+
+ri.ArchiveRecord(ri.COMMENT, 'draw a teapot')
 ri.TransformBegin()
-radius = 0.5
-ri.Translate(0, groud_position + radius, 0)
+scale = 0.4
+ri.Scale(scale, scale, scale)
+ri.Translate(-2.5, groud_position + groud_position*(1 - scale), 1)
+ri.Rotate(-90, 1, 0, 0) #x axis
+ri.Rotate(0, 0, 1, 0) #y axis
+ri.Rotate(60, 0, 0, 1) #z axis
 ri.AttributeBegin()
-ri.Color([1, 0, 0])
-ri.Sphere (radius, -radius, radius, 360)
+ri.Color([0, 1, 0])
+ri.Geometry("teapot")
 ri.AttributeEnd()
 ri.TransformEnd()
 
