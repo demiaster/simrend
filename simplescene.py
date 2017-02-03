@@ -54,26 +54,30 @@ ri.Projection(ri.PERSPECTIVE)
 
 # now we start our world
 ri.WorldBegin()
+groud_position = -1
 # move back 2 in the z so we can see what we are rendering
 ri.ArchiveRecord(ri.COMMENT, 'move our world back 2 in the z so we can see it')
 ri.Translate(0,0,2)
 ri.ArchiveRecord(ri.COMMENT, 'draw ground with bilinear patch')
 ri.TransformBegin()
-ri.Translate(0,-1,0)
+height = 0.1
+ri.Translate(0, groud_position - height/2, 0)
 ri.AttributeBegin()
 ri.Color([0.11, 0.49, 0.89])
-Cube(5, 1, 4)
+Cube(7, height, 4)
 ri.AttributeEnd()
 ri.TransformEnd()
 
 ri.ArchiveRecord(ri.COMMENT, 'draw a sphere primitive')
 ri.TransformBegin()
-ri.Scale(0.1, 0.1, 0.1)
+radius = 0.5
+ri.Translate(0, groud_position + radius, 0)
 ri.AttributeBegin()
 ri.Color([1, 0, 0])
-ri.Sphere (1, -1, 1, 360)
+ri.Sphere (radius, -radius, radius, 360)
 ri.AttributeEnd()
 ri.TransformEnd()
+
 # end our world
 ri.ArchiveRecord(ri.COMMENT, 'end our world')
 ri.WorldEnd()
