@@ -32,14 +32,14 @@ def Cube(width,height,depth) :
   ri.Patch("bilinear",{'P':face})
   ri.ArchiveRecord(ri.COMMENT, '--End of Cube Function--')
 
-def Molecula() :
+def Molecula(_x, _y, _z) :
 
   ri.ArchiveRecord(ri.COMMENT, 'draw a sphere primitive')
   
   ri.TransformBegin()
   ri.Rotate(45, 0, 1, 0) #y axis
   ri.Rotate(45, 1, 0, 0) #x axis
-  ri.Translate(0, 0, 0) #move the whole object
+  ri.Translate(_x, _y, _z) #move the whole object
 
 
   ri.TransformBegin()
@@ -57,9 +57,11 @@ def Molecula() :
 
   #bottom small ball
   ri.TransformBegin()
-  rad = 0.05
+  rad = 0.1
   sqrt = math.sqrt(2)
-  ri.Translate(- 0.5*radius*sqrt, - 0.5*radius*sqrt, 0.5*radius*sqrt)
+  ri.Rotate(0, 1, 0, 0) #x axis
+  ri.Rotate(-45, 0, 0, 1) #z axis
+  ri.Translate(0, - radius, 0)
   ri.AttributeBegin()
   ri.Color([1, 1, 1])
   ri.Sphere (rad, -rad, rad, 360)
@@ -67,34 +69,95 @@ def Molecula() :
   ri.TransformEnd()
 
   #top small ball
+  ri.TransformBegin()
+  rad = 0.1
+  sqrt = math.sqrt(2)
+  ri.Rotate(0, 1, 0, 0) #x axis
+  ri.Rotate(-45, 0, 0, 1) #z axis
+  ri.Translate(0, radius, 0)
+  ri.AttributeBegin()
+  ri.Color([1, 1, 1])
+  ri.Sphere (rad, -rad, rad, 360)
+  ri.AttributeEnd()
+  ri.TransformEnd()
 
-  # ri.TransformBegin()
-  # radius = 0.5
-  # ri.Rotate(0, 1, 0, 0) #x axis
-  # #ri.Rotate(45, 0, 1, 0) #y axis
-  # ri.Rotate(45, 0, 0, 1) #z axis
-  # #ri.Translate(1, groud_position + radius, 0)
-  # ri.Scale(0.1, 1, 0.1)
-  # ri.AttributeBegin()
-  # ri.Color([1, 1, 1])
-  # ri.Sphere (radius, -radius, radius, 360)
-  # ri.AttributeEnd()
-  # ri.TransformEnd()
+#############################################
 
+  ri.TransformBegin()
+  radius = 0.5
+  ri.Rotate(0, 1, 0, 0) #x axis
+  ri.Rotate(45, 0, 0, 1) #z axis
+  ri.Scale(0.1, 1, 0.1)
+  ri.AttributeBegin()
+  ri.Color([1, 1, 1])
+  ri.Sphere (radius, -radius, radius, 360)
+  ri.AttributeEnd()
+  ri.TransformEnd()
 
+  #bottom small ball
+  ri.TransformBegin()
+  rad = 0.1
+  sqrt = math.sqrt(2)
+  ri.Rotate(0, 1, 0, 0) #x axis
+  ri.Rotate(45, 0, 0, 1) #z axis
+  ri.Translate(0, - radius, 0)
+  ri.AttributeBegin()
+  ri.Color([1, 1, 1])
+  ri.Sphere (rad, -rad, rad, 360)
+  ri.AttributeEnd()
+  ri.TransformEnd()
 
-  # ri.TransformBegin()
-  # radius = 0.5
-  # #ri.Rotate(45, 0, 1, 0) #y axis
-  # ri.Rotate(90, 1, 0, 0) #x axis  
-  # ri.Rotate(0, 0, 0, 1) #z axis
-  # #ri.Translate(1, groud_position + radius, 0)
-  # ri.Scale(0.1, 1, 0.1)
-  # ri.AttributeBegin()
-  # ri.Color([1, 1, 1])
-  # ri.Sphere (radius, -radius, radius, 360)
-  # ri.AttributeEnd()
-  # ri.TransformEnd()
+  #top small ball
+  ri.TransformBegin()
+  rad = 0.1
+  sqrt = math.sqrt(2)
+  ri.Rotate(0, 1, 0, 0) #x axis
+  ri.Rotate(45, 0, 0, 1) #z axis
+  ri.Translate(0, radius, 0)
+  ri.AttributeBegin()
+  ri.Color([1, 1, 1])
+  ri.Sphere (rad, -rad, rad, 360)
+  ri.AttributeEnd()
+  ri.TransformEnd()
+
+###########################################
+
+  ri.TransformBegin()
+  radius = 0.5
+  ri.Rotate(90, 1, 0, 0) #x axis  
+  ri.Rotate(0, 0, 0, 1) #z axis
+  ri.Scale(0.1, 1, 0.1)
+  ri.AttributeBegin()
+  ri.Color([1, 1, 1])
+  ri.Sphere (radius, -radius, radius, 360)
+  ri.AttributeEnd()
+  ri.TransformEnd()
+
+  #bottom small ball
+  ri.TransformBegin()
+  rad = 0.1
+  sqrt = math.sqrt(2)
+  ri.Rotate(90, 1, 0, 0) #x axis  
+  ri.Rotate(0, 0, 0, 1) #z axis
+  ri.Translate(0, - radius, 0)
+  ri.AttributeBegin()
+  ri.Color([1, 1, 1])
+  ri.Sphere (rad, -rad, rad, 360)
+  ri.AttributeEnd()
+  ri.TransformEnd()
+
+  #top small ball
+  ri.TransformBegin()
+  rad = 0.1
+  sqrt = math.sqrt(2)
+  ri.Rotate(90, 1, 0, 0) #x axis  
+  ri.Rotate(0, 0, 0, 1) #z axis
+  ri.Translate(0, radius, 0)
+  ri.AttributeBegin()
+  ri.Color([1, 1, 1])
+  ri.Sphere (rad, -rad, rad, 360)
+  ri.AttributeEnd()
+  ri.TransformEnd()  
 
   ri.TransformEnd()
 
@@ -136,42 +199,42 @@ Cube(7, height, 4)
 ri.AttributeEnd()
 ri.TransformEnd()
 
-# ri.ArchiveRecord(ri.COMMENT, 'draw a sphere primitive')
-# ri.TransformBegin()
-# radius = 0.5
-# ri.Translate(1, groud_position + radius, 0)
-# ri.AttributeBegin()
-# ri.Color([1, 0, 0])
-# ri.Sphere (radius, -radius, radius, 360)
-# ri.AttributeEnd()
-# ri.TransformEnd()
+ri.ArchiveRecord(ri.COMMENT, 'draw a sphere primitive')
+ri.TransformBegin()
+radius = 0.5
+ri.Translate(1, groud_position + radius, 0)
+ri.AttributeBegin()
+ri.Color([1, 0, 0])
+ri.Sphere (radius, -radius, radius, 360)
+ri.AttributeEnd()
+ri.TransformEnd()
 
-# ri.ArchiveRecord(ri.COMMENT, 'draw a teapot')
-# ri.TransformBegin()
-# scale = 0.4
-# ri.Scale(scale, scale, scale)
-# ri.Translate(-2.5, groud_position + groud_position*(1 - scale), 1)
-# ri.Rotate(-90, 1, 0, 0) #x axis
-# ri.Rotate(0, 0, 1, 0) #y axis
-# ri.Rotate(60, 0, 0, 1) #z axis
-# ri.AttributeBegin()
-# ri.Color([0, 1, 0])
-# ri.Geometry("teapot")
-# ri.AttributeEnd()
-# ri.TransformEnd()
+ri.ArchiveRecord(ri.COMMENT, 'draw a teapot')
+ri.TransformBegin()
+scale = 0.4
+ri.Scale(scale, scale, scale)
+ri.Translate(-2.5, groud_position + groud_position*(1 - scale), 1)
+ri.Rotate(-90, 1, 0, 0) #x axis
+ri.Rotate(0, 0, 1, 0) #y axis
+ri.Rotate(60, 0, 0, 1) #z axis
+ri.AttributeBegin()
+ri.Color([0, 1, 0])
+ri.Geometry("teapot")
+ri.AttributeEnd()
+ri.TransformEnd()
 
-# ri.ArchiveRecord(ri.COMMENT, 'draw cube')
-# ri.TransformBegin()
-# dimension = 0.5
-# ri.Translate(0, groud_position + dimension/2, 0)
-# ri.Rotate(60, 0, 1, 0) #y axis
-# ri.AttributeBegin()
-# ri.Color([0, 0, 1])
-# Cube(dimension, dimension, dimension)
-# ri.AttributeEnd()
-# ri.TransformEnd()
+ri.ArchiveRecord(ri.COMMENT, 'draw cube')
+ri.TransformBegin()
+dimension = 0.5
+ri.Translate(0, groud_position + dimension/2, 0)
+ri.Rotate(60, 0, 1, 0) #y axis
+ri.AttributeBegin()
+ri.Color([0, 0, 1])
+Cube(dimension, dimension, dimension)
+ri.AttributeEnd()
+ri.TransformEnd()
 
-Molecula()
+Molecula(1, 0, 0)
 
 # end our world
 ri.ArchiveRecord(ri.COMMENT, 'end our world')
