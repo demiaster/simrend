@@ -1,0 +1,26 @@
+#sphere_geo.rib
+Display "sphere_geo.tiff" "file" "rgb"
+Projection "perspective"
+WorldBegin
+        #move everything back
+        Translate 0 -1 4
+
+        #MainBody
+        Sphere 1 -1 1 360
+	TransformBegin
+	Translate 0 1.5 0
+                #MiddleBody
+                TransformBegin
+                        Scale 0.5 0.5 0.5
+                        Sphere 1 -1 1 360
+                TransformEnd
+		
+		#UpperBody
+                TransformBegin
+                        Translate 0 0.8 0
+                        Scale 0.3 0.3 0.3
+                        Sphere 1 -1 1 360
+                TransformEnd
+	TransformEnd
+WorldEnd
+
