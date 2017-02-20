@@ -1,17 +1,36 @@
 #sphere_geo.rib
-Display "sphere_geo.tiff" "file" "rgb"
-Projection "perspective"
+Display "sphere_geo.tiff" "framebuffer" "rgb"
+Quantize "rgba" 255 0 255 1
+Exposure 1.0 2.2
+Format 640 480 1.0
+
+Hider "raytrace"
+Integrator "PxrDirectLighting" "integrator"
+
+Projection "perspective" "fov" [ 30 ]
+
+#Translate 0 0 5
+
 WorldBegin
+
+AttributeBegin
+	#LightSource "pointlight" "theLight" "from" [ -2 2 -2 ] "intensity" [ 7 ]
+	AreaLightSource "PxrStdAreaLight" "theLight" "float exposure" [6]
+	Translate -2 2 -2
+	Sphere 0.1 -0.1 0.1 360
+AttributeEnd
         #move everything back
         Translate 0 -1 4
 
         #MainBody
+	Bxdf "simple/PxrSmoothDielectric" "forTheSphere" "color diffuseColor" [ 0.8 0.1 0.1] "color specularColor" [ 0.1 0.1 0.1 ]
         Sphere 1 -1 1 360
 	TransformBegin
 	Translate 0 1.5 0
                 #MiddleBody
                 TransformBegin
                         Scale 0.5 0.5 0.5
+			Bxdf "simple/PxrSmoothDielectric" "forTheSphere" "color diffuseColor" [ 0.8 0.1 0.1] "color specularColor" [ 0.1 0.1 0.1 ]
                         Sphere 1 -1 1 360
                 TransformEnd
 		
@@ -19,7 +38,8 @@ WorldBegin
                 TransformBegin
                         Translate 0 0.8 0
                         Scale 0.3 0.3 0.3
-                        Sphere 1 -1 1 360
+			Bxdf "simple/PxrSmoothDielectric" "forTheSphere" "color diffuseColor" [ 0.8 0.1 0.1] "color specularColor" [ 0.1 0.1 0.1 ]                        
+			Sphere 1 -1 1 360
                 TransformEnd
 	TransformEnd
 WorldEnd
